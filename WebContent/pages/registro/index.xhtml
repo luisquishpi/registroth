@@ -1,0 +1,174 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>REGISTROTH 1.0.0</title>
+	<script
+		src="/registroth/resources/css/bootstrap_3.3.7/js/bootstrap.min.js"></script>
+	<script
+		src="/registroth/resources/css/adminlte_2.3.12/js/fastclick/fastclick.js"></script>
+	<script src="/registroth/resources/css/adminlte_2.3.12/js/app.min.js"></script>
+
+
+	<meta
+		content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+		name="viewport" />
+	<link rel="stylesheet"
+		href="/registroth/resources/css/bootstrap_3.3.7/css/bootstrap.min.css" />
+	<link rel="stylesheet"
+		href="/registroth/resources/css/font-awesome/css/font-awesome.min.css" />
+	<link rel="stylesheet"
+		href="/registroth/resources/css/adminlte_2.3.12/css/AdminLTE.min.css" />
+
+	<link rel="stylesheet"
+		href="/registroth/resources/css/adminlte_2.3.12/css/skins/_all-skins.min.css" />
+
+	<link rel="stylesheet" href="/registroth/resources/css/login.css" />
+	<link rel="stylesheet" href="/registroth/resources/css/style.css" />
+<style>
+.ui-messages-info, .ui-message-info {
+    color: #f6f6f6;
+    background-color: #3c763d;
+    border-color: #666;
+}
+</style>
+
+</h:head>
+<body>
+	<p:dialog widgetVar="statusDialog" modal="true" draggable="false"
+		closable="false" resizable="false" showHeader="false">
+		<p:graphicImage url="../../resources/images/loadingbar.gif" />
+	</p:dialog>
+	<div class="container" style="margin-top: 40px">
+		<div class="row" style="font-size: 30px;">
+			<div class="col-sm-6 col-md-6 col-md-offset-3">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<strong>REGISTRO DE ASISTENCIA</strong>
+					</div>
+					<div class="panel-body">
+						<h:form id="frm">
+							<fieldset>
+							<p:focus for="txtCedula" />
+								<div class="row">
+									<div class="col-sm-12 col-md-12">
+										<div class="form-group text-center">
+											<div id="fecha" />
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-sm-12 col-md-12">
+										<div class="form-group text-center"
+											style="background-color: #000; color: #fff; font-size: 50px;">
+											<div id="reloj" />
+										</div>
+									</div>
+								</div>
+								<div class="row" style="height: 20px;"></div>
+								<div class="row">
+									<div class="col-sm-12 col-md-10  col-md-offset-1 ">
+										<div class="form-group">
+											<div class="input-group" style="height: 50px;">
+												<span class="input-group-addon"> <i
+													class="glyphicon glyphicon-user"></i>
+												</span>
+												<p:inputText id="txtCedula" class="form-control" autocomplete="off"
+													placeholder="Cédula" name="loginname" type="text"
+													value="#{registroCreateBean.cedula}" required="true"
+													requiredMessage="Ingrese su número de cédula"
+													style="font-size: 30px;height: 50px; color:#000;" onfocus="this.select();" />
+											</div>
+										</div>
+										<div class="row" style="height: 20px;"></div>
+										<div class="form-group">
+											<p:commandButton id="btnGuardar"
+												class="btn btn-lg btn-primary btn-block"
+												onstart="PF('statusDialog').show()"
+												onsuccess="PF('statusDialog').hide()" value="MARCAR"
+												actionListener="#{registroCreateBean.guardar()}"
+												update="txtCedula" style="font-size: 30px;"
+												oncomplete="PrimeFaces.focus('frm:txtCedula');" />
+										</div>
+									</div>
+								</div>
+								<p:messages id="msg" showDetail="false" autoUpdate="true"
+									closable="true" style="font-size:20px;" />
+							</fieldset>
+						</h:form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<script>
+	//<![CDATA[
+	
+	$(document).on("pfAjaxComplete", function() {
+    var $messages = $(".ui-messages div");
+
+    if ($messages.length) {
+        var wordCount = $messages.text().split(/\W/).length;
+        var readingTimeMillis = 2000 + (wordCount * 100);
+
+        setTimeout(function() {
+            $messages.slideUp();
+        }, readingTimeMillis);
+    }
+});
+
+	
+	function muestraReloj() {
+	  var fechaHora = new Date();
+	  var horas = fechaHora.getHours();
+	  var minutos = fechaHora.getMinutes();
+	  var segundos = fechaHora.getSeconds();
+	 
+	  if(horas < 10) { horas = '0' + horas; }
+	  if(minutos < 10) { minutos = '0' + minutos; }
+	  if(segundos < 10) { segundos = '0' + segundos; }
+	  
+	  document.getElementById("reloj").innerHTML = horas+':'+minutos+':'+segundos;
+
+	  function getMonthStrings() {
+		    return [
+		        'Enero',
+		        'Febrero',
+		        'Marzo',
+		        'Abril',
+		        'Mayo',
+		        'Junio',
+		        'Julio',
+		        'Agosto',
+		        'Septiembre',
+		        'Octubre',
+		        'Noviembre',
+		        'Deciembre'
+		    ];
+		}
+
+		function getCurrentFormattedDate(date) {
+		    return (function () {
+		        return getMonthStrings()[this.getMonth()] + ' ' + (function (d) {
+		            var s = d.toString(), l = s[s.length - 1];
+		            return s + (['', '', ''][l - 1] || '');
+		        })(this.getDate()) + ', ' + this.getFullYear();
+		    }).call(date || new Date());
+		}
+		
+		 document.getElementById("fecha").innerHTML = getCurrentFormattedDate(fechaHora);
+	}
+	window.onload = function() {
+		  setInterval(muestraReloj, 1000);
+		}
+	//]]>
+	</script>
+
+</body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<title>REGISTROTH 1.0.0</title>
+
+	<!--  <script src="/registroth/resources/js/jquery_3.2.1/jquery.min.js"></script> -->
+	<script
+		src="/registroth/resources/css/bootstrap_3.3.7/js/bootstrap.min.js"></script>
+	<script
+		src="/registroth/resources/css/adminlte_2.3.12/js/fastclick/fastclick.js"></script>
+	<script src="/registroth/resources/css/adminlte_2.3.12/js/app.min.js"></script>
+
+
+	<meta
+		content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+		name="viewport" />
+	<link rel="stylesheet"
+		href="/registroth/resources/css/bootstrap_3.3.7/css/bootstrap.min.css" />
+	<link rel="stylesheet"
+		href="/registroth/resources/css/font-awesome/css/font-awesome.min.css" />
+	<link rel="stylesheet"
+		href="/registroth/resources/css/adminlte_2.3.12/css/AdminLTE.min.css" />
+
+	<link rel="stylesheet"
+		href="/registroth/resources/css/adminlte_2.3.12/css/skins/_all-skins.min.css" />
+
+	<link rel="stylesheet" href="/registroth/resources/css/style.css" />
+</h:head>
+<h:body class="hold-transition skin-blue sidebar-mini">
+	<f:metadata>
+		<f:event type="preRenderView"
+			listener="#{usuarioLoginBean.checkLogedIn()}" />
+	</f:metadata>
+	<p:dialog widgetVar="statusDialog" modal="true" draggable="false"
+		closable="false" resizable="false" showHeader="false">
+		<p:graphicImage url="../../resources/images/loadingbar.gif" />
+	</p:dialog>
+	<h:form>
+		<p:idleMonitor timeout="#{1000*60*10}">
+			<p:ajax event="idle" listener="#{usuarioLoginBean.logOut()}" />
+		</p:idleMonitor>
+
+	</h:form>
+	<div class="wrapper">
+		<header class="main-header"> <ui:insert name="header">
+			<ui:include src="header.xhtml" />
+		</ui:insert> </header>
+		<aside class="main-sidebar"> <section class="sidebar">
+		<ui:insert name="sidebar">
+			<ui:include src="sidebar.xhtml" />
+		</ui:insert> </section> </aside>
+
+		<div class="content-wrapper">
+			<section class="content-header">
+			<div class="row">
+				<div class="col-lg-12">
+					<br />
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h4>
+								<i class="fa fa-bars"></i> <b> <ui:insert name="title">
+										<ui:include src="title.xhtml" />
+									</ui:insert>
+								</b>
+							</h4>
+						</div>
+						<div class="panel-body">
+							<div class="row">
+								<div class="col-lg-12">
+									<ui:insert name="content">
+										<ui:include src="content.xhtml" />
+									</ui:insert>
+
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			</section>
+		</div>
+		<footer class="main-footer"> <ui:insert name="footer">
+			<ui:include src="footer.xhtml" />
+		</ui:insert> </footer>
+	</div>
+
+</h:body>
+</html>

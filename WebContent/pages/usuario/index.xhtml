@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="#{root}/WEB-INF/template/layout.xhtml">
+
+	<ui:define name="title">Lista de usuarios</ui:define>
+	<ui:define name="content">
+		<h:form>
+			<div class="panel">
+				<div class="panel-body">
+					<div class="btn-group">
+						<p:commandButton onclick="location.href = 'create.xhtml';"
+							icon="fa fa-plus" class="btn" value="Nuevo" />
+					</div>
+				</div>
+			</div>
+			<p:dataTable id="tblLista" var="usuario"
+				value="#{usuarioIndexBean.usuarios}"
+				paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
+				paginator="true" rows="10" style="margin-bottom:20px">
+				<p:column style="width:150px;" sortBy="#{usuario.cedula}">
+					<f:facet name="header">
+						<h:outputText value="Cedula" />
+					</f:facet>
+					<h:outputText value="#{usuario.cedula}" />
+				</p:column>
+				<p:column sortBy="#{usuario.nombre}">
+					<f:facet name="header">
+						<h:outputText value="Nombres y Apellidos" />
+					</f:facet>
+					<h:outputText value="#{usuario.nombre.concat(' ').concat(usuario.apellido)}" />
+				</p:column>
+				<p:column sortBy="#{usuario.email}">
+					<f:facet name="header">
+						<h:outputText value="Email" />
+					</f:facet>
+					<h:outputText value="#{usuario.email}" />
+				</p:column>
+				<p:column sortBy="#{usuario.telefono}">
+					<f:facet name="header">
+						<h:outputText value="Teléfono" />
+					</f:facet>
+					<h:outputText value="#{usuario.telefono}" />
+				</p:column>
+				<p:column sortBy="#{usuario.usuarioTipo.usuarioTipo}">
+					<f:facet name="header">
+						<h:outputText value="Tipo" />
+					</f:facet>
+					<h:outputText value="#{usuario.usuarioTipo.usuarioTipo}" />
+				</p:column>
+				<p:column style="width:100px;">
+					<f:facet name="header">
+					</f:facet>
+					<div class="btn-group">
+						<p:commandButton onclick="location.href = 'index.xhtml';"
+							icon="fa fa-edit" class="btn" />
+						<p:commandButton onclick="location.href = 'index.xhtml';"
+							icon="fa fa-trash" class="btn" />
+					</div>
+				</p:column>
+			</p:dataTable>
+		</h:form>
+
+		<script>
+	//<![CDATA[
+	
+	//]]>
+	</script>
+
+	</ui:define>
+</ui:composition>
+</html>

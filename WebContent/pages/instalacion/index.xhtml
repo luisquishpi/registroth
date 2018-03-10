@@ -1,0 +1,146 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<script
+		src="/registroth/resources/css/bootstrap_3.3.7/js/bootstrap.min.js"></script>
+
+
+	<link rel="stylesheet"
+		href="/registroth/resources/css/bootstrap_3.3.7/css/bootstrap.min.css" />
+	<link rel="stylesheet"
+		href="/registroth/resources/css/font-awesome/css/font-awesome.min.css" />
+	<link rel="stylesheet" href="/registroth/resources/css/install.css" />
+
+
+</h:head>
+<body>
+	<p:dialog widgetVar="statusDialog" modal="true" draggable="false"
+		closable="false" resizable="false" showHeader="false">
+		<p:graphicImage url="../../resources/images/loadingbar.gif" />
+	</p:dialog>
+	<div class="container">
+		<div class="row">
+
+			<legend>
+				<h2>Bienvenido</h2>
+			</legend>
+			<p>Bienvenido al sistema de RegistroTH, este es un formulario para
+				la instalación por primera vez</p>
+
+			<h:form id="frm" class="form-horizontal">
+				<p:growl id="growl" sticky="false" life="5000" showDetail="false"
+					autoUpdate="true" />
+
+				<fieldset>
+					<div class="form-group">
+						<label class="col-md-2 control-label" for="textinput"></label>
+						<legend class="col-md-8 ">Datos del Instituto</legend>
+					</div>
+					<div class="form-group">
+						<label class="col-md-4 control-label">RUC/Código*</label>
+						<div class="col-md-4">
+							<p:inputText class="form-control input-md"
+								value="#{instalacionBean.instituto.ruc}" required="true"
+								requiredMessage="RUC es obligatorio" maxlength="13"/>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-md-4 control-label" for="textinput">Nombre
+							de la empresa*</label>
+						<div class="col-md-4">
+							<p:inputText class="form-control input-md"
+								value="#{instalacionBean.instituto.nombre}" required="true"
+								requiredMessage="Nombre del Instituto es obligatorio " />
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-md-2 control-label" for="textinput"></label>
+						<legend class="col-md-8 ">Datos del Administrador</legend>
+					</div>
+
+					<div class="form-group">
+						<label class="col-md-4 control-label">Cédula*</label>
+						<div class="col-md-4">
+							<p:inputMask class="form-control" maxlength="10"
+								value="#{instalacionBean.usuario.cedula}" required="true"
+								requiredMessage="Cédula es obligatorio "
+								validatorMessage="Cédula debe tener 10 caracteres"
+								mask="9999999999">
+								<f:validateLength minimum="10" />
+							</p:inputMask>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-md-4 control-label">Nombres*</label>
+						<div class="col-md-4">
+							<p:inputText class="form-control"
+								value="#{instalacionBean.usuario.nombre}" required="true"
+								requiredMessage="Nombre del administrador es obligatorio " />
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-md-4 control-label">Apellidos*</label>
+						<div class="col-md-4">
+							<p:inputText class="form-control"
+								value="#{instalacionBean.usuario.apellido}" required="true"
+								requiredMessage="Apellidos es obligatorio " />
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-md-4 control-label">Email*</label>
+						<div class="col-md-4">
+							<p:inputText class="form-control"
+								value="#{instalacionBean.usuario.email}" required="true"
+								requiredMessage="Email es obligatorio "
+								validatorMessage="Formato de Email incorrecto">
+								<f:validateRegex
+									pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+							</p:inputText>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-md-4 control-label">Teléfono</label>
+						<div class="col-md-4">
+							<p:inputText class="form-control"
+								value="#{instalacionBean.usuario.telefono}" />
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-md-4 control-label">Contraseña*</label>
+						<div class="col-md-4">
+							<p:password id="pwd1" match="pwd2" class="form-control"
+								type="password" value="#{instalacionBean.usuario.clave}"
+								required="true" requiredMessage="Contraseña es obligatorio"
+								validatorMessage="Contraseñas no coinciden" />
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-md-4 control-label">Repite Contraseña*</label>
+						<div class="col-md-4">
+							<p:password id="pwd2" class="form-control" type="password"
+								value="#{instalacionBean.usuario.clave}" required="true"
+								requiredMessage="Repite contraseña es obligatorio" />
+						</div>
+					</div>
+					<div class="col-md-4"></div>
+					<div class="btn-group">
+						<p:commandLink value="Guardar"
+							actionListener="#{instalacionBean.guardar()}"
+							class="btn btn-primary" ajax="true" update="frm"
+							onstart="PF('statusDialog').show()"
+							onsuccess="PF('statusDialog').hide()" />
+					</div>
+					<p:messages id="messages" showDetail="false" autoUpdate="true"
+						closable="true" />
+				</fieldset>
+			</h:form>
+
+		</div>
+	</div>
+</body>
+</html>

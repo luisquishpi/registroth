@@ -1,0 +1,139 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="#{root}/WEB-INF/template/layout.xhtml">
+
+	<ui:define name="title">Reporte de Registros</ui:define>
+	<ui:define name="content">
+		<h:form id="frm" class="form-horizontal">
+			<p:growl id="growl" sticky="false" life="5000" showDetail="false"
+				autoUpdate="true" />
+			<div class="form-group">
+				<label class="col-md-3 control-label">Cédula</label>
+				<div class="col-md-3">
+					<p:inputMask class="form-control" maxlength="10"
+						value="#{reporteRegistroBean.cedula}"
+						validatorMessage="Cédula debe tener 10 caracteres"
+						mask="9999999999" slotChar="">
+
+					</p:inputMask>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-md-3 control-label">Desde*</label>
+				<div class="col-md-3">
+					<p:calendar value="#{reporteRegistroBean.desde}" required="true"
+						requiredMessage="Fecha Desde es obligatorio" pattern="dd/MM/yyyy" />
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-md-3 control-label">Hasta*</label>
+				<div class="col-md-3">
+					<p:calendar value="#{reporteRegistroBean.hasta}" required="true"
+						requiredMessage="Fecha Hasta es obligatorio" pattern="dd/MM/yyyy" />
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-md-3 control-label"></label>
+				<div class="col-md-3">
+					<p:commandButton class="form-control" value="Buscar" ajax="true"
+						update="tblLista" actionListener="#{reporteRegistroBean.buscar()}" />
+				</div>
+			</div>
+			<div class="form-group">
+				<p:dataTable id="tblLista" var="entidad"
+					value="#{reporteRegistroBean.lista}"
+					paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
+					paginator="true" rows="100" style="margin-bottom:20px">
+					<p:column sortBy="#{entidad[1]}" style="width:80px;">
+						<f:facet name="header">
+							<h:outputText value="Cedula" />
+						</f:facet>
+						<h:outputText value="#{entidad[1]}" />
+					</p:column>
+					<p:column
+						sortBy="#{reporteRegistroBean.getApellidosNombres(entidad[2],entidad[3])}">
+						<f:facet name="header">
+							<h:outputText value="Apellido y Nombres" />
+						</f:facet>
+						<h:outputText
+							value="#{reporteRegistroBean.getApellidosNombres(entidad[2],entidad[3])}" />
+					</p:column>
+
+					<p:column sortBy="#{entidad[4]}">
+						<f:facet name="header">
+							<h:outputText value="Tipo Contrato" />
+						</f:facet>
+						<h:outputText value="#{entidad[4]}" />
+					</p:column>
+					<p:column sortBy="#{entidad[5]}" style="width:80px;">
+						<f:facet name="header">
+							<h:outputText value="Fecha" />
+						</f:facet>
+						<h:outputText value="#{reporteRegistroBean.getFecha(entidad[5])}" />
+					</p:column>
+					<p:column
+						sortBy="#{reporteRegistroBean.getHoraEntrada(entidad[6])}"
+						style="width:80px;">
+						<f:facet name="header">
+							<h:outputText value="Hora Ingreso Institución" />
+						</f:facet>
+						<h:outputText
+							value="#{reporteRegistroBean.getHoraEntrada(entidad[6])}" />
+					</p:column>
+					<p:column
+						sortBy="#{reporteRegistroBean.getHoraSalidaAlmuerzo(entidad[6])}"
+						style="width:80px;">
+						<f:facet name="header">
+							<h:outputText value="Hora Salida Almuerzo" />
+						</f:facet>
+						<h:outputText
+							value="#{reporteRegistroBean.getHoraSalidaAlmuerzo(entidad[6])}" />
+					</p:column>
+					<p:column
+						sortBy="#{reporteRegistroBean.getHoraRegresoAlmuerzo(entidad[6])}"
+						style="width:80px;">
+						<f:facet name="header">
+							<h:outputText value="Hora Regreso Almuerzo" />
+						</f:facet>
+						<h:outputText
+							value="#{reporteRegistroBean.getHoraRegresoAlmuerzo(entidad[6])}" />
+					</p:column>
+
+					<p:column sortBy="#{reporteRegistroBean.getHoraSalida(entidad[6])}"
+						style="width:80px;">
+						<f:facet name="header">
+							<h:outputText value="Hora Salida Institución" />
+						</f:facet>
+						<h:outputText
+							value="#{reporteRegistroBean.getHoraSalida(entidad[6])}" />
+					</p:column>
+				</p:dataTable>
+			</div>
+			<div class="form-group">
+				<label class="col-md-3 control-label"></label>
+				<div class="col-md-3">
+					<p:outputPanel id="pnlExportar">
+						<h:commandLink>
+						Exportar a Excel
+						<p:dataExporter type="xls" target="tblLista"
+								fileName="#{reporteRegistroBean.getNombreArchivo()}" />
+						</h:commandLink>
+					</p:outputPanel>
+				</div>
+			</div>
+		</h:form>
+
+		<script>
+	//<![CDATA[
+	
+	//]]>
+	</script>
+
+	</ui:define>
+</ui:composition>
+</html>

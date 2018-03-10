@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<script
+		src="/registroth/resources/css/bootstrap_3.3.7/js/bootstrap.min.js"></script>
+
+
+	<link rel="stylesheet"
+		href="/registroth/resources/css/bootstrap_3.3.7/css/bootstrap.min.css" />
+	<link rel="stylesheet"
+		href="/registroth/resources/css/font-awesome/css/font-awesome.min.css" />
+	<link rel="stylesheet" href="/registroth/resources/css/install.css" />
+
+
+</h:head>
+<body>
+	<p:dialog widgetVar="statusDialog" modal="true" draggable="false"
+		closable="false" resizable="false" showHeader="false">
+		<p:graphicImage url="../../resources/images/loadingbar.gif" />
+	</p:dialog>
+	<div class="container">
+		<div class="row">
+			<legend>
+				<h2>¡Éxito!</h2>
+			</legend>
+			<p>El sistema de registroTH se ha instalado correctamente</p>
+
+			<h:form id="frm" class="form-horizontal">
+				<fieldset>
+					<div class="form-group">
+						<label class="col-md-2 control-label" for="textinput"></label>
+						<legend class="col-md-8 ">Recuerde que los datos para Iniciar Sesión son</legend>
+					</div>
+					<div class="form-group">
+						<label class="col-md-4 control-label" for="textinput">Usuario</label>
+						<div class="col-md-4">Tu número de cédula</div>
+					</div>
+					<div class="form-group">
+						<label class="col-md-4 control-label" for="textinput">Clave</label>
+						<div class="col-md-4">Tu contraseña elegida</div>
+					</div>
+					<div class="col-md-4"></div>
+					<div class="btn-group">
+						<p:commandLink value="Iniciar Sesión"
+							onclick="location.href = '../login/index.xhtml';" icon="fa fa-sign-out"
+							class="btn btn-primary" immediate="true" />
+					</div>
+					<p:messages id="messages" showDetail="false" autoUpdate="true"
+						closable="true" />
+				</fieldset>
+			</h:form>
+
+		</div>
+	</div>
+</body>
+</html>

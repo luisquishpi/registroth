@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui">
+
+<h:head></h:head>
+<h:body>
+	<div class="user-panel">
+		<div class="user-panel">
+			<p:outputPanel rendered="#{usuarioLoginBean.instituto.logo != null}">
+				<div class="pull-left image">
+					<o:graphicImage value="#{usuarioLoginBean.instituto.logo}"
+						style="max-width: 100%;" dataURI="true" class="img-thumbnail" />
+				</div>
+			</p:outputPanel>
+		</div>
+		<div class="sidebar-form" style="color: #fff; border: 0px;">
+			<div class="text-center">
+				<strong>#{usuarioLoginBean.instituto.nombre}</strong>
+			</div>
+		</div>
+
+	</div>
+	<!-- sidebar menu: : style can be found in sidebar.less -->
+	<ul class="sidebar-menu">
+		<li class="header">MAIN NAVIGATION</li>
+		<li class="active treeview"><a
+			href="../../pages/escritorio/index.xhtml"> <i
+				class="fa fa-dashboard"></i> <span>Escritorio</span> <span
+				class="pull-right-container"> </span>
+		</a></li>
+		<li class="treeview"><a href="#"> <i class="fa fa-dashboard"></i>
+				<span>Funcionarios</span> <span class="pull-right-container">
+					<i class="fa fa-angle-left pull-right"></i>
+			</span>
+		</a>
+			<ul class="treeview-menu">
+				<li><a href="../funcionario/index.xhtml"><i
+						class="fa fa-circle-o"></i>Todas las entradas</a></li>
+				<li><a href="../funcionario/create.xhtml"><i
+						class="fa fa-circle-o"></i>Añadir nuevo</a></li>
+			</ul></li>
+		<li class="treeview"><a href="#"> <i class="fa fa-dashboard"></i>
+				<span>Tipos de Contrato</span> <span class="pull-right-container">
+					<i class="fa fa-angle-left pull-right"></i>
+			</span>
+		</a>
+			<ul class="treeview-menu">
+				<li><a href="../tipocontrato/index.xhtml"><i
+						class="fa fa-circle-o"></i>Todas las entradas</a></li>
+				<li><a href="../tipocontrato/create.xhtml"><i
+						class="fa fa-circle-o"></i>Añadir nuevo</a></li>
+			</ul></li>
+		<li class="active treeview"><a
+			href="../../pages/institucion/index.xhtml"> <i
+				class="fa fa-dashboard"></i> <span>Institución</span> <span
+				class="pull-right-container"> </span>
+		</a></li>
+		<li class="active treeview"><a
+			href="../../pages/reporte/index.xhtml"> <i
+				class="fa fa-dashboard"></i> <span>Reporte</span> <span
+				class="pull-right-container"> </span>
+		</a></li>
+
+
+	</ul>
+</h:body>
+</html>

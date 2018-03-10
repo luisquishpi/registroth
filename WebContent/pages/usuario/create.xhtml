@@ -1,0 +1,112 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="#{root}/WEB-INF/template/layout.xhtml">
+	<ui:define name="title">Usuario</ui:define>
+	<ui:define name="content">
+		<h:form id="frm" class="form-horizontal">
+			<p:growl id="growl" sticky="false" life="5000" showDetail="false"
+				autoUpdate="true" />
+
+			<div class="form-group">
+				<label class="col-md-2 control-label">Cédula*</label>
+				<div class="col-md-4">
+					<p:inputMask class="form-control" maxlength="10"
+						value="#{usuarioCreateBean.usuario.cedula}" required="true"
+						requiredMessage="Cédula es obligatorio "
+						validatorMessage="Cédula debe tener 10 caracteres"
+						mask="9999999999" slotChar="">
+						<f:validateLength minimum="10" />
+					</p:inputMask>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-md-2 control-label">Nombres*</label>
+				<div class="col-md-4">
+					<p:inputText class="form-control"
+						value="#{usuarioCreateBean.usuario.nombre}" required="true"
+						requiredMessage="Apellidos es obligatorio " />
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-md-2 control-label">Apellidos*</label>
+				<div class="col-md-4">
+					<p:inputText class="form-control"
+						value="#{usuarioCreateBean.usuario.apellido}" required="true"
+						requiredMessage="Apellidos es obligatorio " />
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-md-2 control-label">Email*</label>
+				<div class="col-md-4">
+					<p:inputText class="form-control"
+						value="#{usuarioCreateBean.usuario.email}" required="true"
+						requiredMessage="Email es obligatorio "
+						validatorMessage="Formato de Email incorrecto">
+						<f:validateRegex
+							pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+					</p:inputText>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-md-2 control-label">Teléfono*</label>
+				<div class="col-md-4">
+					<p:inputText class="form-control" required="true"
+						requiredMessage="Teléfono es obligatorio "
+						value="#{usuarioCreateBean.usuario.telefono}" />
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-md-2 control-label">Tipo*</label>
+				<div class="col-md-4">
+					<p:selectOneMenu required="true"
+						requiredMessage="Tipo de usuario es obligatorio "
+						value="#{usuarioCreateBean.usuario.usuarioTipo}"
+						converter="omnifaces.SelectItemsConverter" style="width:100%;">
+						<f:selectItem itemLabel="Seleccione" itemValue=""
+							noSelectionOption="true" />
+						<f:selectItems value="#{usuarioCreateBean.usuarioTipos}"
+							var="entidad" itemLabel="#{entidad.usuarioTipo}"
+							itemValue="#{entidad}" />
+					</p:selectOneMenu>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-md-2 control-label">Contraseña*</label>
+				<div class="col-md-4">
+					<p:password id="pwd1" match="pwd2" class="form-control"
+						type="password" value="#{usuarioCreateBean.usuario.clave}"
+						required="true" requiredMessage="Contraseña es obligatorio"
+						validatorMessage="Contraseñas no coinciden" />
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-md-2 control-label">Repite Contraseña*</label>
+				<div class="col-md-4">
+					<p:password id="pwd2" class="form-control" type="password"
+						value="#{usuarioCreateBean.usuario.clave}" required="true"
+						requiredMessage="Repite contraseña es obligatorio" />
+				</div>
+			</div>
+			<div class="col-md-2"></div>
+			<div class="btn-group">
+				<p:commandButton value="Guardar"
+					actionListener="#{usuarioCreateBean.guardar()}" icon="fa fa-save"
+					class="btn" ajax="true" update="frm"
+					onstart="PF('statusDialog').show()"
+					onsuccess="PF('statusDialog').hide()" />
+				<p:commandButton value="Regresar"
+					onclick="location.href = 'index.xhtml';" icon="fa fa-sign-out"
+					class="btn" immediate="true" />
+			</div>
+			<p:messages id="messages" showDetail="false" autoUpdate="true"
+				closable="true" />
+
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>

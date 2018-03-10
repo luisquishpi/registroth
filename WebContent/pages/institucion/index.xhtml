@@ -1,0 +1,103 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui">
+
+<ui:composition template="#{root}/WEB-INF/template/layout.xhtml">
+	<ui:define name="title">Tipo de Contrato</ui:define>
+	<ui:define name="content">
+		<h:form id="frm" class="form-horizontal" enctype="multipart/form-data">
+			<p:growl id="growl" sticky="false" life="5000" showDetail="false"
+				autoUpdate="true" />
+
+			<div class="form-group">
+				<label class="col-md-2 control-label">RUC*</label>
+				<div class="col-md-4">
+					<p:inputMask class="form-control" maxlength="13"
+						value="#{institutoIndexBean.instituto.ruc}" required="true"
+						requiredMessage="RUC es obligatorio "
+						validatorMessage="RUC debe tener 13 caracteres"
+						mask="9999999999999" slotChar="">
+						<f:validateLength minimum="13" />
+					</p:inputMask>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-md-2 control-label">Nombre*</label>
+				<div class="col-md-4">
+					<p:inputText class="form-control"
+						value="#{institutoIndexBean.instituto.nombre}" required="true"
+						requiredMessage="Nombre es obligatorio " />
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-md-2 control-label">Dirección*</label>
+				<div class="col-md-4">
+					<p:inputText class="form-control"
+						value="#{institutoIndexBean.instituto.direccion}" required="true"
+						requiredMessage="Dirección es obligatorio " />
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-md-2 control-label">Teléfono*</label>
+				<div class="col-md-4">
+					<p:inputText class="form-control"
+						value="#{institutoIndexBean.instituto.telefono}" required="true"
+						requiredMessage="Teléfono es obligatorio " />
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-md-2 control-label">Email*</label>
+				<div class="col-md-4">
+					<p:inputText class="form-control"
+						value="#{institutoIndexBean.instituto.email}" required="true"
+						requiredMessage="Email es obligatorio " />
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-md-2 control-label">Sitio Web</label>
+				<div class="col-md-4">
+					<p:inputText class="form-control"
+						value="#{institutoIndexBean.instituto.url}" />
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-md-2 control-label">Imagen*</label>
+				<div class="col-md-4">
+					<p:fileUpload value="#{institutoIndexBean.file}" mode="simple"
+						allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-md-2 control-label"></label>
+				<div class="col-md-4">
+					<p:outputPanel
+						rendered="#{usuarioLoginBean.instituto.logo != null}">
+						<div class="pull-left image">
+							<o:graphicImage value="#{usuarioLoginBean.instituto.logo}"
+								style="max-width: 50%;" dataURI="true" class="img-thumbnail" />
+						</div>
+					</p:outputPanel>
+				</div>
+			</div>
+
+			<div class="col-md-2"></div>
+			<div class="btn-group">
+				<p:commandButton value="Guardar"
+					actionListener="#{institutoIndexBean.guardar()}" icon="fa fa-save"
+					class="btn" ajax="false" update="frm"
+					onstart="PF('statusDialog').show()"
+					onsuccess="PF('statusDialog').hide()" />
+				<p:commandButton value="Regresar"
+					onclick="location.href = 'index.xhtml';" icon="fa fa-sign-out"
+					class="btn" immediate="true" />
+			</div>
+			<p:messages id="messages" showDetail="false" autoUpdate="true"
+				closable="true" />
+
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>

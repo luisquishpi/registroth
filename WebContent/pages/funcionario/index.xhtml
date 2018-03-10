@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="#{root}/WEB-INF/template/layout.xhtml">
+
+	<ui:define name="title">Lista de Funcionarios</ui:define>
+	<ui:define name="content">
+		<h:form>
+			<div class="panel">
+				<div class="panel-body">
+					<div class="btn-group">
+						<p:commandButton onclick="location.href = 'create.xhtml';"
+							icon="fa fa-plus" class="btn" value="Nuevo" />
+					</div>
+				</div>
+			</div>
+			<p:dataTable id="tblLista" var="entidad"
+				value="#{funcionarioIndexBean.funcionarios}"
+				paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
+				paginator="true" rows="10" style="margin-bottom:20px">
+				<p:column sortBy="#{entidad.cedula}">
+					<f:facet name="header">
+						<h:outputText value="Cédula" />
+					</f:facet>
+					<h:outputText value="#{entidad.cedula}" />
+				</p:column>
+				<p:column sortBy="#{entidad.nombre}">
+					<f:facet name="header">
+						<h:outputText value="Nombre" />
+					</f:facet>
+					<h:outputText value="#{entidad.nombre}" />
+				</p:column>
+				<p:column sortBy="#{entidad.apellido}">
+					<f:facet name="header">
+						<h:outputText value="Apellido" />
+					</f:facet>
+					<h:outputText value="#{entidad.apellido}" />
+				</p:column>
+
+				<p:column sortBy="#{entidad.tipoContrato.nombre}">
+					<f:facet name="header">
+						<h:outputText value="Tipo de Contrato" />
+					</f:facet>
+					<h:outputText value="#{entidad.tipoContrato.nombre}" />
+				</p:column>
+				<p:column sortBy="#{entidad.estado}">
+					<f:facet name="header">
+						<h:outputText value="Activo" />
+					</f:facet>
+					<p:selectBooleanCheckbox value="#{entidad.estado}" />
+				</p:column>
+
+				<p:column style="width:100px;">
+					<f:facet name="header">
+					</f:facet>
+					<div class="btn-group">
+						<p:commandButton
+							actionListener="#{funcionarioIndexBean.goToEdit(entidad.id)}"
+							icon="fa fa-edit" class="btn" />
+					</div>
+				</p:column>
+			</p:dataTable>
+		</h:form>
+
+		<script>
+	//<![CDATA[
+	
+	//]]>
+	</script>
+
+	</ui:define>
+</ui:composition>
+</html>

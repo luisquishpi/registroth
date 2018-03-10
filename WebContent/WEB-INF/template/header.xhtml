@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head></h:head>
+<h:body>
+	<!-- Logo -->
+	<a href="#" class="logo"> <!-- mini logo for sidebar mini 50x50 pixels -->
+		<span class="logo-mini"><b>TH</b>1.0</span> <!-- logo for regular state and mobile devices -->
+		<span class="logo-lg"><b>RegistroTH</b>1.0.0</span>
+	</a>
+	<!-- Header Navbar: style can be found in header.less -->
+	<nav class="navbar navbar-static-top"> <!-- Sidebar toggle button-->
+	<a href="#" class="sidebar-toggle" data-toggle="offcanvas"
+		role="button"> <span class="sr-only">Toggle navigation</span>
+	</a> <!-- Navbar Right Menu -->
+	<div class="navbar-custom-menu">
+		<ul class="nav navbar-nav">
+			<!-- User Account: style can be found in dropdown.less -->
+			<li class="dropdown user user-menu"><a href="#"
+				class="dropdown-toggle" data-toggle="dropdown"> <img
+					src="../../resources/images/fotoVacio.png" class="user-image"
+					alt="User Image" /> <span class="hidden-xs">
+						#{usuarioLoginBean.usuario.nombre}</span>
+			</a>
+				<ul class="dropdown-menu">
+					<!-- User image -->
+					<li class="user-header"><img
+						src="../../resources/images/fotoVacio.png" class="img-circle"
+						alt="User Image" />
+						<p>
+							#{usuarioLoginBean.usuario.nombre.concat("
+							").concat(usuarioLoginBean.usuario.apellido)} <small>Administrador</small>
+						</p></li>
+					<!-- Menu Body -->
+					<li class="user-body"><h:form>
+							<div class="row">
+								<div class="col-xs-4 text-center"></div>
+								<div class="col-xs-4 text-center"></div>
+								<div class="col-xs-4 text-center"></div>
+							</div>
+						</h:form></li>
+					<!-- Menu Footer-->
+					<li class="user-footer"><h:form>
+							<div class="pull-left">
+								<p:commandLink class="btn btn-default btn-flat"
+									actionListener="#">Perfil</p:commandLink>
+							</div>
+							<div class="pull-right">
+								<p:commandLink class="btn btn-default btn-flat"
+									actionListener="#{usuarioLoginBean.logOut()}">Salir</p:commandLink>
+							</div>
+						</h:form></li>
+
+				</ul></li>
+			<!-- Tasks: style can be found in dropdown.less -->
+			<li class="dropdown tasks-menu"><a href="#"
+				class="dropdown-toggle" data-toggle="dropdown"> <i
+					class="fa fa-gears"></i>
+			</a>
+				<ul class="dropdown-menu">
+					<li class="header">Configuraciones generales</li>
+					<li>
+						<ul class="menu">
+							<li><a href="../../pages/usuario/index.xhtml"> <i
+									class="fa fa-users text-aqua"></i> Lista de usuarios
+							</a></li>
+							<li><a href="../../pages/usuario/create.xhtml"> <i
+									class="fa fa-user text-red"></i> Añadir nuevo usuario
+							</a></li>
+						</ul>
+
+					</li>
+				</ul></li>
+		</ul>
+	</div>
+
+	</nav>
+</h:body>
+</html>

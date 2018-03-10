@@ -1,0 +1,69 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="#{root}/WEB-INF/template/layout.xhtml">
+	<ui:define name="title">Tipo de Contrato</ui:define>
+	<ui:define name="content">
+		<h:form id="frm" class="form-horizontal">
+			<p:growl id="growl" sticky="false" life="5000" showDetail="false"
+				autoUpdate="true" />
+
+			<div class="form-group">
+				<label class="col-md-2 control-label">Nombre*</label>
+				<div class="col-md-4">
+					<p:inputText class="form-control"
+						value="#{tipoContratoCreateBean.tipoContrato.nombre}"
+						required="true" requiredMessage="Nombre es obligatorio "
+						placeholder="Ej: Tiempo completo" />
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-md-2 control-label">Horas a la semana*</label>
+				<div class="col-md-4">
+					<p:inputText class="form-control"
+						value="#{tipoContratoCreateBean.tipoContrato.horasSemana}"
+						required="true" requiredMessage="Horas a la semana es obligatorio"
+						placeholder="Ej:40" />
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-md-2 control-label">Hora de ingreso*</label>
+				<div class="col-md-4">
+					<p:inputText class="form-control"
+						value="#{tipoContratoCreateBean.horaIngreso}"
+						required="true" requiredMessage="Hora de ingreso es obligatorio"
+						placeholder="Ej: 14:00:00" maxlength="8" />
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-md-2 control-label">Hora de salida*</label>
+				<div class="col-md-4">
+					<p:inputText class="form-control"
+						value="#{tipoContratoCreateBean.horaSalida}"
+						required="true" requiredMessage="Hora de salida es obligatorio"
+						placeholder="Ej: 22:00:00" maxlength="8" />
+				</div>
+			</div>
+
+			<div class="col-md-2"></div>
+			<div class="btn-group">
+				<p:commandButton value="Guardar"
+					actionListener="#{tipoContratoCreateBean.guardar()}"
+					icon="fa fa-save" class="btn" ajax="true" update="frm"
+					onstart="PF('statusDialog').show()"
+					onsuccess="PF('statusDialog').hide()" />
+				<p:commandButton value="Regresar"
+					onclick="location.href = 'index.xhtml';" icon="fa fa-sign-out"
+					class="btn" immediate="true" />
+			</div>
+			<p:messages id="messages" showDetail="false" autoUpdate="true"
+				closable="true" />
+
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>
